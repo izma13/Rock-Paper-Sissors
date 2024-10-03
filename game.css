@@ -1,0 +1,190 @@
+.game-container {
+  aspect-ratio: 1 / 1;
+  background-image: url(../images/bg-triangle.svg);
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 65%;
+  place-items: center;
+  display: grid;
+  grid-template-areas:
+    "paper scissors"
+    "rock rock";
+  max-width: 35rem;
+  margin-inline: auto;
+  transition: opacity 1000ms;
+}
+
+.rock {
+  grid-area: rock;
+  --custom-gradient: var(--rock-gradient);
+  --custom--shadow-color: hsl(349, 71%, 27%);
+}
+
+.paper {
+  grid-area: paper;
+  --custom-gradient: var(--paper-gradient);
+  --custom--shadow-color: hsl(230, 49%, 42%);
+}
+
+.scissors {
+  grid-area: scissors;
+  --custom-gradient: var(--scissors-gradient);
+  --custom--shadow-color: hsl(40, 84%, 33%);
+}
+
+.game-container .action-circle {
+  height: 70%;
+}
+
+.action-circle {
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: 100rem;
+  padding: 1.2rem;
+  background-image: linear-gradient(
+    to top,
+    var(--custom-gradient, var(--background-gradient))
+  );
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  transition: transform 300ms, filter 300ms;
+
+  box-shadow: 0rem 0.4rem 0rem
+      var(--custom--shadow-color, var(--light-shadow-color)),
+    0.2rem 1.2rem 0.5rem var(--dark-shadow-color);
+}
+
+.action-circle:hover {
+  transform: scale(1.15);
+}
+
+.action-circle:active {
+  transform: scale(1.05);
+  filter: sepia(0.3);
+}
+
+.action-circle div {
+  box-shadow: inset 0rem 0.2em 0.2rem 0.2rem var(--light-shadow-color);
+
+  background-color: var(--light-color);
+  aspect-ratio: 1 / 1;
+  width: 95%;
+  border-radius: 100rem;
+  display: grid;
+  place-items: center;
+}
+
+.action-circle img {
+  width: 50%;
+}
+
+.play-container {
+  z-index: 1;
+  transition: all 1000ms;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+  grid-template-areas:
+    "move-player move-house"
+    "text-player text-house"
+    "results results";
+  grid-template-rows: auto auto 1px;
+  max-width: 50rem;
+}
+
+@media (max-width: 870px) {
+  .play-container.with-results {
+    grid-template-rows: auto auto 200px;
+  }
+}
+
+.play-container .move.player {
+  grid-area: move-player;
+}
+
+.play-container .move.house {
+  grid-area: move-house;
+}
+
+.play-container .text.player {
+  grid-area: text-player;
+}
+
+.play-container .text.house {
+  grid-area: text-house;
+}
+
+.play-container .results {
+  grid-area: results;
+  transition: opacity 1000ms;
+  white-space: nowrap;
+}
+
+.results p {
+  font-size: 3rem;
+  font-weight: 900;
+  letter-spacing: 3px;
+  word-spacing: 1rem;
+}
+
+.results button {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  background-color: var(--light-color);
+  border: none;
+  align-self: stretch;
+}
+
+.play-container .move {
+  background-color: var(--header-outline);
+  aspect-ratio: 1 / 1;
+  border-radius: 35rem;
+  align-self: center;
+  width: 70%;
+}
+
+.play-container .text {
+  letter-spacing: 2px;
+  transform: scaleX(0.85);
+  text-align: center;
+  align-self: start;
+  font-size: 1rem;
+  font-weight: 600;
+}
+
+.play-container .action-circle {
+  aspect-ratio: 1 / 1;
+  width: 75%;
+}
+@media (min-width: 870px) {
+  .play-container .action-circle {
+    width: 100%;
+  }
+
+  .play-container {
+    grid-template-columns: 1fr 2rem 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      "text-player results text-house"
+      "move-player results move-house";
+  }
+
+  .play-container.with-results {
+    grid-template-columns: 1fr 300px 1fr;
+  }
+
+  .play-container .results {
+    margin-inline: 2rem;
+  }
+
+  .play-container .text {
+    font-size: 1.1rem;
+    margin-block-start: 6rem;
+  }
+
+  .results p {
+    letter-spacing: -3px;
+  }
+}
